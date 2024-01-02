@@ -20,6 +20,9 @@
       <h2>Events in Action</h2>
       <button v-on:click="incrementCounter()">Add</button>
       <button v-on:click="decrementCounter()">Reduce</button>
+      <button v-on:click="addNumberToCounter(5)">Add 5 to counter</button>
+      <input type="text" v-on:input="setName($event,'H')">
+      <p>Name: {{ name }}</p>
       <p>Result: {{ counter }}</p>
     </section>
   </body>
