@@ -22,9 +22,7 @@ const app = Vue.createApp({
                 return 'Master Vue!';
             }
         }
-
     }
-
 });
 
 app.mount('#user-goal');
