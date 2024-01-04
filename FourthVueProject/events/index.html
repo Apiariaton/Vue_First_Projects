@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="https://unpkg.com/vue" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -20,10 +20,18 @@
       <h2>Events in Action</h2>
       <button v-on:click="incrementCounter()">Add</button>
       <button v-on:click="decrementCounter()">Reduce</button>
-      <button v-on:click="addNumberToCounter(5)">Add 5 to counter</button>
-      <input type="text" v-on:input="setName($event,'H')">
-      <p>Name: {{ name }}</p>
+      <!-- Right,left and middle to add sensitivity to variation in mouse click -->
+      <button v-on:click.right="addNumberToCounter(5)">Add 5 to counter</button>
+      <input type="text" v-on:input="setName($event,'H')" v-on:keyup.enter="confirmInput">
+      <p>Name: {{ confirmedInput }}</p>
       <p>Result: {{ counter }}</p>
+    </section>
+    <section>
+     <!-- Prevent form submission -->
+     <form v-on:submit.prevent="submitForm">
+     <input type="text">
+     <button>Sign Up</button> 
+    </form>
     </section>
   </body>
 </html>
