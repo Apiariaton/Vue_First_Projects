@@ -24,6 +24,7 @@
       <button v-on:click.right="addNumberToCounter(5)">Add 5 to counter</button>
       <input type="text" v-on:input="setName($event,'H')" v-on:keyup.enter="confirmInput">
       <p>Name: {{ confirmedInput }}</p>
+      <p v-once>Starting Counter: {{counter}}</p>
       <p>Result: {{ counter }}</p>
     </section>
     <section>
