@@ -22,8 +22,9 @@
       <button v-on:click="decrementCounter()">Reduce</button>
       <!-- Right,left and middle to add sensitivity to variation in mouse click -->
       <button v-on:click.right="addNumberToCounter(5)">Add 5 to counter</button>
-      <input type="text" v-on:input="setName($event,'H')" v-on:keyup.enter="confirmInput">
-      <p>Name: {{ confirmedInput }}</p>
+      <input type="text" v-model="name" v-on:keyup.enter="confirmInput">
+      <button v-on:click="resetInput">Reset Input</button>
+      <p>Name: {{ fullName }}</p>
       <p v-once>Starting Counter: {{counter}}</p>
       <p>Result: {{ counter }}</p>
     </section>
