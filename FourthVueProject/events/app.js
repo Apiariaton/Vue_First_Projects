@@ -16,6 +16,15 @@ const app = Vue.createApp({
       return this.name + ' ' + this.lastName;
     }
   },
+  watch: {
+    counter(value)
+    {
+      if (value < -50 || value > 50 )
+      {
+        this.counter = 0;
+      }
+    }
+  },
   methods: {
     incrementCounter(){
       this.counter += 1;
