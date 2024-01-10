@@ -10,9 +10,9 @@ const app = Vue.createApp({
     {
         selectThisBox(box)
         {
-            const thisBoxLabel = box + "Selected";
-            this[thisBoxLabel] = true;
-            const otherBoxes = Object.keys(this).filter(box => box.includes("box") && box != thisBoxLabel);
+            const thisBoxSelectedLabel = box + "Selected";
+            this[thisBoxSelectedLabel] = true;
+            const otherBoxes = Object.keys(this).filter(box => box.includes("box") && box != thisBoxSelectedLabel);
             
             otherBoxes.forEach(otherBox =>{
                 this[otherBox] = false;
