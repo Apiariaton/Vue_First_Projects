@@ -17,12 +17,12 @@
       <h1>Vue Course Goals</h1>
     </header>
     <section id="user-goals">
-      <h2>My course goal<h2 v-show="goals.length >= 2">s</h2></h2>
+      <h2>My course goal<span v-show="goals.length >= 2">s</span></h2>
       <input type="text" v-model="goalInputText"/>
       <button @click="addGoalToGoals">Add Goal</button>
       <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
       <ul v-else>
-        <li>Goal</li>
+        <li v-for="goal in goals">{{ goal }}</li>
       </ul>
     </section>
   </body>
