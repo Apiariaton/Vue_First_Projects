@@ -5,8 +5,7 @@ const app = Vue.createApp({
             courseGoalB: 'Deepen knowledge of Vue.js...',
             courseGoalC: 'Finish course',
             courseGoalD: "<p2> Master Vue and build amazing projects </p2>",
-            vueLink: 'https://www.google.com/'
-            
+            vueLink: 'https://www.google.com/'  
         }
     },
     methods:
