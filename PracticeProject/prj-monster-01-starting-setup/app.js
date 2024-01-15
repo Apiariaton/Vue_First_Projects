@@ -11,6 +11,7 @@ const app = Vue.createApp({
             playerHealthOutOf100: 100,
             previousMovesList: [],
             currentRound: 0,
+            gameResult: null,
         };
     },
     computed: {
@@ -28,10 +29,28 @@ const app = Vue.createApp({
         }
     },
     watch: {
-
-
-
-    
+        playerHealthOutOf100(value)
+        {
+            if (value <= 0 && this.monsterHealthOutOf100 <= 0)
+            {
+                this.gameResult = "draw";
+            }
+            else if (value <= 0)
+            {
+                this.gameResult = "loss";
+            }
+        } 
+        monsterHealthOutOf100(value)
+        {
+            if (value <= 0 && this.monsterHealthOutOf100 <= 0)
+            {
+                this.gameResult = "draw";
+            }   
+            else if (value <= 0)
+            {
+                this.gameResult = "victory";
+            }
+        }      
     },
     methods: {
         attackMonster()
@@ -59,7 +78,13 @@ const app = Vue.createApp({
         {
             this.currentRound++;
             const healValue = getRandomInteger(min=5,max=15);
+            if (this.playerHealth + healValue > 100)
+            {
+            this.playerHealthOutOf100 = 100; 
+            }
+            else {
             this.playerHealthOutOf100 += healValue;
+            }
             this.previousMovesList.push(`Player healed, regaining ${healValue}% of their health!!`);
             this.healMonster();
         },

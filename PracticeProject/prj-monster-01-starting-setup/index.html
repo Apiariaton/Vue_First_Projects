@@ -29,6 +29,12 @@
           <div class="healthbar__value" :style="playerHealthBarPercentageWidth"></div>
         </div>
       </section>
+      <section class="container">
+        <h2 v-if="gameResult === 'loss'">Game Over...</h2>
+        <h2 v-else-if="gameResult == 'victory'">Victory is yours!!</h2>
+        <h2 v-else-if="gameResult === null">To Battle!</h2>
+        <h2 v-else-if="gameResult === 'draw'">The Monster was Vanquished, yet so was the player...</h2>
+      </section>
       <section id="controls">
         <button @click="attackMonster">ATTACK</button>
         <button @click="specialAttackMonster" :disabled="!playerCanUseSpecialAttack">SPECIAL ATTACK</button>
