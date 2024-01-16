@@ -35,15 +35,20 @@
         <h2 v-else-if="gameResult === null">To Battle!</h2>
         <h2 v-else-if="gameResult === 'draw'">The Monster was Vanquished, yet so was the player...</h2>
       </section>
-      <section id="controls">
-        <button @click="attackMonster">ATTACK</button>
-        <button @click="specialAttackMonster" :disabled="!playerCanUseSpecialAttack">SPECIAL ATTACK</button>
-        <button @click="healPlayer">HEAL</button>
-        <button>SURRENDER</button>
+      <section class="container" v-if="gameResult !== null">
+        <button @click="startNewGame">Start Game</button>
+        </section>
+      <section id="controls" v-else>
+        <button @click="attackMonster" :disabled="gameEnded">ATTACK</button>
+        <button @click="specialAttackMonster" :disabled="!playerCanUseSpecialAttack || gameEnded">SPECIAL ATTACK</button>
+        <button @click="healPlayer" :disabled="gameEnded">HEAL</button>
+        <button @click="surrender" :disabled="gameEnded" >SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+        <li v-for="move in previousMovesList">{{move}}</li> 
+        </ul>
       </section>
     </div>
   </body>

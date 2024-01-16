@@ -17,15 +17,27 @@ const app = Vue.createApp({
     computed: {
         monsterHealthBarPercentageWidth()
         {
+            if (this.monsterHealthOutOf100 < 0)
+            {
+                return {width : '0%'};
+            }
             return {width : this.monsterHealthOutOf100 + '%'};
         },
         playerHealthBarPercentageWidth()
         {
+            if (this.playerHealthOutOf100 < 0)
+            {
+                return {width : '0%'};
+            }
             return {width: this.playerHealthOutOf100 + '%'};
         },
         playerCanUseSpecialAttack()
         {
             return ((this.currentRound) % 3) === 0;
+        },
+        gameEnded()
+        {
+            return (this.gameResult != null);
         }
     },
     watch: {
@@ -39,10 +51,10 @@ const app = Vue.createApp({
             {
                 this.gameResult = "loss";
             }
-        } 
+        }, 
         monsterHealthOutOf100(value)
         {
-            if (value <= 0 && this.monsterHealthOutOf100 <= 0)
+            if (value <= 0 && this.playerHealthOutOf100 <= 0)
             {
                 this.gameResult = "draw";
             }   
@@ -53,6 +65,12 @@ const app = Vue.createApp({
         }      
     },
     methods: {
+        startNewGame(){
+            this.monsterHealthOutOf100 = 100;
+            this.playerHealthOutOf100 = 100;
+            this.previousMovesList = [];
+            this.gameResult = null;
+        },
         attackMonster()
         {
             this.currentRound++;
@@ -72,6 +90,7 @@ const app = Vue.createApp({
             this.currentRound++;
             const specialAttackValue = getRandomInteger(min=10,max=20);
             this.monsterHealthOutOf100 -= specialAttackValue;
+            this.previousMovesList.push(`Player unleashed a Special Attack on the Monster, dealing ${specialAttackValue} damage!!`);
             this.attackPlayer();
         },
         healPlayer()
@@ -93,6 +112,10 @@ const app = Vue.createApp({
             const healValue = getRandomInteger(min=3,max=7);
             this.monsterHealthOutOf100 += healValue;
             this.previousMovesList.push(`Monster healed, regaining ${healValue}% of their health...`);
+        },
+        surrender()
+        {
+            this.gameResult = "loss";
         }
     },
 });
