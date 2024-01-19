@@ -19,20 +19,30 @@ app.mount('#app');
 
 
 const data = {
-  message: 'Hello'
+  message: 'Hello',
+  longMessage: 'Hello',
+  speaker: 'Percival Mook'
 };
 
 const handler = {
   set(target,key,value){
-    console.log(target);
-    console.log(key);
-    console.log(value);
+    console.log("Target:",target);
+    console.log("Key:",key);
+    console.log("Value:",value);
+    if (key === 'message')
+    {
+      target.longMessage = value + ' World!';
+    }
+    target.message = value;
+    console.log(target.longMessage);
+    console.log(target.message);
   }
 
 };
 
 const proxy = new Proxy(data,handler);
 proxy.message = "Hello...";
+proxy.speaker = "Gerald Marks";
 
 let message = 'Hello!!';
 
