@@ -3,6 +3,7 @@
         <h2>{{ name }} {{ isFavouriteFriend ? "(Favourite)" : ""}}</h2>
         <button @click="toggleDetailsAreVisible"> {{detailsAreVisible ? "Hide Details" : "Show Details"}}</button>
         <button @click="toggleFavouriteFriend">{{ isFavouriteFriend ? "Unfavourite this friend" : "Favourite this friend"}}</button>
+        <button @click="removeFriendFromFriends">Remove this Friend</button>
         <ul v-if="detailsAreVisible">
             <li><strong>Phone: </strong> {{ phoneNumber }}</li>
             <li><strong>Email:</strong> {{emailAddress }} </li>
@@ -55,7 +56,7 @@ export default {
         else {
             console.warn("An id needs to be provided to the function which is called with toggle-favourite-friend")
         }
-    }}],
+    }, },'remove-friend-from-friends'],
     data(){
         return {
             detailsAreVisible: false,
@@ -69,6 +70,10 @@ export default {
         {
             this.$emit('toggle-favourite-friend',this.id);
             // this.isFavourite = !this.isFavourite;
+        },
+        removeFriendFromFriends()
+        {
+            this.$emit('remove-friend-from-friends',this.id);
         }
     }
 

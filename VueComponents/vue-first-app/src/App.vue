@@ -1,6 +1,7 @@
 <template>
   <section>
     <header><h1>My Friends</h1></header>
+    <new-friend-form @add-new-friend-to-friends="addNewFriendToFriends"/>
     <ul>
       <friend-contact
         v-for="friend in friends"
@@ -11,12 +12,16 @@
         :email-address="friend.email"
         :is-favourite-friend="friend.isFavourite"
         @toggle-favourite-friend="toggleFavouriteStatus"
+        @remove-friend-from-friends="removeFriendFromFriends"
       ></friend-contact>
     </ul>
   </section>
 </template>
 
 <script>
+import NewFriendForm from './components/NewFriendForm.vue'
+import FriendContact from './components/FriendContact.vue';
+
 export default {
   data() {
     return {
@@ -42,7 +47,19 @@ export default {
     toggleFavouriteStatus(friendId){
         const locatedFriend = this.friends.find(friend => friend.id == friendId);
         locatedFriend.isFavourite = !locatedFriend.isFavourite;
+    },
+    addNewFriendToFriends(newFriendObject)
+    {
+        this.friends.push(newFriendObject);
+    },
+    removeFriendFromFriends(friendId)
+    {
+        this.friends = this.friends.filter(friend => friend.id != friendId);
     }
+  },
+  components: {
+    FriendContact,
+    NewFriendForm
   }
 };
 </script>
