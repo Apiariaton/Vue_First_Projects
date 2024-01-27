@@ -46,6 +46,16 @@ export default {
             // }
         }
     },
+    emits: 
+    [{"toggle-favourite-friend": function(id){
+        if (!id)
+        {
+            return true;
+        }
+        else {
+            console.warn("An id needs to be provided to the function which is called with toggle-favourite-friend")
+        }
+    }}],
     data(){
         return {
             detailsAreVisible: false,
