@@ -6,5 +6,4 @@ These projects explore Vue.js! While learning about Vue, I have covered the foll
 -Slots <br>
 
 I am very excited at the prospect of starting work on my next project soon. <br>
-This project will be an interactive platform for enthusiasts to explore boardgames, written in Vue.js, ASP.NET and making use
-of OpenAI's API.
+This project will be an interactive platform for enthusiasts to explore boardgames, written using Vue.js, ASP.NET Core and making use of OpenAI's API.
