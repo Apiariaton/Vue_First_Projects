@@ -14,8 +14,9 @@
       </template>  
     </course-goals>
     <div>
-    <active-goals></active-goals>
-    <manage-goals></manage-goals>
+    <button @click="setSelectedComponent('active-goals')"> Active Goals </button>
+    <button @click="setSelectedComponent('manage-goals')"> Manage Goals </button>
+    <component :is="selectedComponent"></component>
   </div>
   </div>
 </template>
@@ -40,6 +41,7 @@ export default {
     },
   data() {
     return {
+      selectedComponent: 'active-goals',
       activeUser: {
         name: 'Maximilian Schwarzmüller',
         description: 'Site owner and admin',
@@ -47,6 +49,11 @@ export default {
       },
     };
   },
+  methods: {
+    setSelectedComponent(cmp){
+      this.selectedComponent = cmp;
+    }
+  }
 };
 </script>
 
