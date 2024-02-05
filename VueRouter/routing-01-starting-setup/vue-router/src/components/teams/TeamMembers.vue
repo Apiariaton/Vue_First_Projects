@@ -12,6 +12,7 @@
 import UserItem from '../users/UserItem.vue';
 
 export default {
+  // props: ['teamId'],
   inject: ['users','teams'],
   components: {
     UserItem
@@ -22,23 +23,37 @@ export default {
       members: [],
     };
   },
-  created() {
-    const teamId = this.$route.params.teamId; 
-    const selectedTeam = this.teams.find(team => team.id == teamId);
-    
-    const memberIDsOfSelectedTeam = selectedTeam.members;
-
-    const selectedTeamName = selectedTeam.name;
-    const selectedMembersOfTeam = [];
-
-    for (const memberID of memberIDsOfSelectedTeam)
+  methods:
+  {
+    //Or loadTeamMembersFromParam(teamId)
+    loadTeamMembersFromParam(route)
     {
-      const selectedUser = this.users.find(user => user.id == memberID);
-      selectedMembersOfTeam.push(selectedUser);
-    }
+      const teamId = this.route.params.teamId; 
+      const selectedTeam = this.teams.find(team => team.id == teamId);
+      
+      const memberIDsOfSelectedTeam = selectedTeam.members;
 
-    this.members = selectedMembersOfTeam;
-    this.teamName = selectedTeamName;
+      const selectedTeamName = selectedTeam.name;
+      const selectedMembersOfTeam = [];
+
+      for (const memberID of memberIDsOfSelectedTeam)
+      {
+        const selectedUser = this.users.find(user => user.id == memberID);
+        selectedMembersOfTeam.push(selectedUser);
+      }
+
+      this.members = selectedMembersOfTeam;
+      this.teamName = selectedTeamName;
+    }
+  },
+  created() {
+    this.loadTeamMembersFromParam(this.$route);
+  },
+  watch: {
+    $route(newRoute)
+    {
+      this.loadTeamMembersFromParam(newRoute);
+    }
   }
 };
 </script>
