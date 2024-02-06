@@ -28,7 +28,7 @@ export default {
     //Or loadTeamMembersFromParam(teamId)
     loadTeamMembersFromParam(route)
     {
-      const teamId = this.route.params.teamId; 
+      const teamId = route.params.teamId; 
       const selectedTeam = this.teams.find(team => team.id == teamId);
       
       const memberIDsOfSelectedTeam = selectedTeam.members;
@@ -48,6 +48,7 @@ export default {
   },
   created() {
     this.loadTeamMembersFromParam(this.$route);
+    console.log(this.$route.query);
   },
   watch: {
     $route(newRoute)
